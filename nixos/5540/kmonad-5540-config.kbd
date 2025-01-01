@@ -1,0 +1,22 @@
+
+(defsrc
+  caps a s d f j k l ;
+  102d
+  )
+
+(defalias
+  esc (tap-hold-next-release 500 esc lctrl)
+  a (tap-hold-next-release 500 a lmet)
+  s (tap-hold-next-release 500 s lalt)
+  d (tap-hold-next-release 500 d lctl)
+  f (tap-hold-next-release 500 f lsft)
+  ; (tap-hold-next-release 500 ; rmet)
+  l (tap-hold-next-release 500 l ralt)
+  k (tap-hold-next-release 500 k rctl)
+  j (tap-hold-next-release 500 j rsft)
+  )
+
+(deflayer default
+  @esc @a @s @d @f @j @k @l @;
+  grv
+)
