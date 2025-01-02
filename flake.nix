@@ -41,6 +41,8 @@
     # User configuration
     me = rec {
       username = "stuart";
+      githubUsername = "stuart-warren";
+      githubEmail = "stuart.warren@gmail.com";
       homeDirectory = /home/${username};
       timeZone = "Europe/London";
       keyboard = {

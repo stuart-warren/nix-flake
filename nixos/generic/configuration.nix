@@ -77,7 +77,6 @@
     unzip
     kitty
     direnv
-    google-chrome
     home-manager
   ];
   environment.variables = {
@@ -92,6 +91,11 @@
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
       };
     };
+  };
+  services.libinput.enable = true;
+  services.libinput.touchpad = {
+    clickMethod = "clickfinger";
+    tapping = false;
   };
 
   users.users = {
