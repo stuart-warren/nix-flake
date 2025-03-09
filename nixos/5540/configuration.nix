@@ -30,6 +30,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
   networking.hostName = "nix5540";
   networking.networkmanager.enable = true;

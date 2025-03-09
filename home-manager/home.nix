@@ -104,6 +104,9 @@
       # "$mod SHIFT, l, exec, ${pkgs.hyprlock}/bin/hyprlock"
       # Focus
       "$mod, f, fullscreen"
+      # Windows
+      "$mod SHIFT, f, togglefloating"
+      "$mod SHIFT, f, centerwindow"
       # Workspaces
       "$mod, 1, workspace, 1"
       "$mod, 2, workspace, 2"

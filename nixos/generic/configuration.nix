@@ -96,7 +96,10 @@
   services.libinput.touchpad = {
     clickMethod = "clickfinger";
     tapping = false;
+    dev = "/dev/input/mouse2";
   };
+
+  virtualisation.docker.enable = true;
 
   users.users = {
     "${me.username}" = {
