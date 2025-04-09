@@ -12,8 +12,9 @@
         background = "#00000000";
         opacity = 0.8;
         output = "eDP-1";
-        modules-left = [ "sway/workspaces" "sway/mode" "sway/scratchpad" ];
-        modules-center = [ "sway/window" ];
+        modules-left =
+          [ "hyprland/workspaces" "hyprland/mode" "hyprland/scratchpad" ];
+        modules-center = [ "hyprland/window" ];
         modules-right = [
           "idle_inhibitor"
           "wireplumber"
@@ -23,6 +24,15 @@
           "clock"
           "tray"
         ];
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-active = "{icon}";
+          format-occupied = "{icon}";
+          format-empty = "{icon}";
+          background-color-active = "#FF0000";
+          background-color-occupied = "#FFFF00";
+          background-color-empty = "#000000";
+        };
       };
     };
     systemd.enable = true;
