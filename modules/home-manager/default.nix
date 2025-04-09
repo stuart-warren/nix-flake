@@ -3,4 +3,8 @@
 {
   # List your module files here
   # my-module = import ./my-module.nix;
+  neovim = import ./neovim.nix;
+  shell = import ./shell.nix;
+  terminal = import ./terminal.nix;
+  hyprland = import ./hyprland.nix;
 }
