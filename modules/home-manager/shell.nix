@@ -193,7 +193,7 @@
         ignoreSpace = true;
         share = true;
       };
-      initExtra = ''
+      initContent = ''
         clone() {
           repo="''${1}"
           d="''${repo#'https://'}"

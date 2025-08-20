@@ -25,7 +25,7 @@ in {
         extends = "⟩";
         precedes = "⟨";
         eol = "↵";
-      }; 
+      };
     }; # end opts
 
     match = { ExtraWhitespace = "\\s\\+$"; };
@@ -97,20 +97,22 @@ in {
       lualine = {
         enable = true;
         settings.options = {
-	  sectionSeparators = {
-	    left = "";
+          sectionSeparators = {
+            left = "";
             right = "";
           };
           componentSeparators = {
             left = "|";
             right = "|";
-	  };
+          };
         };
       };
       copilot-lua = {
         enable = true;
-        panel.enabled = false;
-        suggestion.enabled = false;
+        settings = {
+          panel.enabled = false;
+          suggestion.enabled = false;
+        };
       };
       inc-rename = { enable = true; };
       indent-blankline = { enable = true; };
@@ -160,7 +162,7 @@ in {
       # friendly-snippets = { enable = true; };
       luasnip = {
         enable = true;
-        fromVscode = [{ }];
+        fromVscode = [ { } ];
       };
       lsp-format = { enable = true; };
       lsp = {

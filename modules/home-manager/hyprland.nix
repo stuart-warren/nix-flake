@@ -53,17 +53,19 @@
       mouse_refocus = true;
     };
     "$terminal" = "${pkgs.kitty}/bin/kitty";
-    "$filemanager" = "${pkgs.dolphin}/bin/dolphin";
+    "$filemanager" = "${pkgs.kdePackages.dolphin}/bin/dolphin";
     "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
     "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
     "$brightnessctl" = "${pkgs.brightnessctl}/bin/brightnessctl";
+    "$hyprswitch" = "${pkgs.hyprswitch}/bin/hyprswitch";
     "$mod" = "SUPER";
     "$hyper" = "SUPER CTRL ALT SHIFT";
     monitor = [ ",prefered,auto,1" ];
     bind = [
       # General
       "$mod, return, exec, $terminal"
-      "$hyper, t, exec, hyprswitch kitty"
+      "$hyper, t, exec, $hyprswitch kitty"
+      "$hyper, b, exec, $hyprswitch google-chrome"
       "$hyper, SPACE, exec, $menu"
       "$hyper, f, exec, $filemanager"
       "$mod SHIFT, e, exit"

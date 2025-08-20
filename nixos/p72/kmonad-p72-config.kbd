@@ -1,0 +1,72 @@
+
+(defsrc
+  tab q w e r t y u i o p
+  caps a s d f g h j k l ;
+  lsft 102d z x c v b n m , .
+  spc
+  )
+
+(defalias
+  esc (tap-hold-next-release 500 esc lctrl)
+  
+  a (tap-hold-next-release 500 a lmet)
+  s (tap-hold-next-release 500 s lalt)
+  d (tap-hold-next-release 500 d lctl)
+  f (tap-hold-next-release 500 f lsft)
+  ; (tap-hold-next-release 500 ; rmet)
+  l (tap-hold-next-release 500 l ralt)
+  k (tap-hold-next-release 500 k rctl)
+  j (tap-hold-next-release 500 j rsft)
+
+  hyp (layer-toggle hyper)
+
+  hyr (tap-hold-next-release 500 r @hyp)
+  hyu (tap-hold-next-release 500 u @hyp)
+  )
+
+(deflayer default
+  _ _ _ _ @hyr _ _ @hyu _ _ _
+  @esc @a @s @d @f _ _  @j @k @l @;
+  _ grv _ _ _ _ _ _ _ _ _
+  _
+)
+
+(defalias
+  hq M-A-C-S-q
+  hw M-A-C-S-w
+  he M-A-C-S-e
+  hr M-A-C-S-r
+  ht M-A-C-S-t
+  hy M-A-C-S-y
+  hu M-A-C-S-u
+  hi M-A-C-S-i
+  ho M-A-C-S-o
+  hp M-A-C-S-p
+  ha M-A-C-S-a
+  hs M-A-C-S-s
+  hd M-A-C-S-d
+  hf M-A-C-S-f
+  hg M-A-C-S-g
+  hh M-A-C-S-h
+  hj M-A-C-S-j
+  hk M-A-C-S-k
+  hl M-A-C-S-l
+  h; M-A-C-S-;
+  hz M-A-C-S-z
+  hx M-A-C-S-x
+  hc M-A-C-S-c
+  hv M-A-C-S-v
+  hb M-A-C-S-b
+  hn M-A-C-S-n
+  hm M-A-C-S-m
+  h, M-A-C-S-,
+  h. M-A-C-S-.
+  hspc M-A-C-S-spc
+)
+
+(deflayer hyper
+  _ @hq @hw @he @hr @ht @hy @hu @hi @ho @hp
+  _ @ha @hs @hd @hf @hg @hh @hj @hk @hl @h;
+  _ _   @hz @hx @hc @hv @hb @hn @hm @h, @h.
+  @hspc
+)
