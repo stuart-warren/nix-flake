@@ -41,23 +41,24 @@
     };
   };
 
-  nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
+  nix =
+    let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   time.timeZone = "${me.timeZone}";
 
@@ -104,6 +105,35 @@
       extraGroups =
         [ "wheel" "networkmanager" "audio" "docker" "input" "uinput" ];
       shell = pkgs.zsh;
+      packages = with pkgs; [ brave ];
+    };
+  };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+    loadModels = [ "gemma3" "gemma3n:e4b" "codegemma" "gpt-oss" ];
+  };
+
+  services.open-webui = {
+    enable = true;
+    port = 8080;
+    environment = {
+      ENABLE_RAG_WEB_SEARCH = "True";
+      RAG_WEB_SEARCH_ENGINE = "searxng";
+      RAG_WEB_SEARCH_RESULT_COUNT = "3";
+      RAG_WEB_SEARCH_CONCURRENT_REQUESTS = "10";
+      SEARXNG_QUERY_URL = "http://localhost:9090/search?q=<query>";
+    };
+  };
+
+  services.searx = {
+    enable = true;
+    package = pkgs.searxng;
+    settings = {
+      server.port = 9090;
+      server.secret_key = "foobar";
+      search.formats = [ "html" "json" ];
     };
   };
 
