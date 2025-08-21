@@ -46,7 +46,7 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [ google-chrome wofi kdePackages.qtsvg ];
+  home.packages = with pkgs; [ google-chrome wofi kdePackages.qtsvg gemini-cli ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

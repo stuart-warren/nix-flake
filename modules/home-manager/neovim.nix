@@ -114,6 +114,7 @@ in {
           suggestion.enabled = false;
         };
       };
+      copilot-chat.enable = true;
       inc-rename = { enable = true; };
       indent-blankline = { enable = true; };
       comment = { enable = true; };
@@ -162,7 +163,7 @@ in {
       # friendly-snippets = { enable = true; };
       luasnip = {
         enable = true;
-        fromVscode = [ { } ];
+        fromVscode = [{ }];
       };
       lsp-format = { enable = true; };
       lsp = {

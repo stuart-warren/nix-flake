@@ -3,6 +3,7 @@
   home = {
     sessionPath =
       [ "$HOME/go/bin" "$HOME/.local/bin" "$HOME/.nix-profile/bin" ];
+
   };
   fonts.fontconfig.enable = true;
   programs = {
@@ -165,8 +166,8 @@
         # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
         # bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
         # execute sessionizer
-        bind-key -r p run-shell "tmux neww -n sessionizer ~/.local/bin/sessionizer"
-        bind-key -r h run-shell "tmux neww -n sessionizer ~/.local/bin/sessionizer stuart"
+        bind-key -r p run-shell "tmux neww -n sessionizer ${pkgs.sessionizer}/bin/sessionizer"
+        bind-key -r h run-shell "tmux neww -n sessionizer ${pkgs.sessionizer}/bin/sessionizer stuart"
         # send input to all panes
         bind C-s set-window-option synchronize-panes
         # nicer split commands
@@ -193,6 +194,7 @@
         ignoreSpace = true;
         share = true;
       };
+      localVariables = { GITROOT = "$HOME/src"; };
       initContent = ''
         clone() {
           repo="''${1}"
@@ -204,7 +206,7 @@
           pushd "''${GITROOT}/''${d}"
           git fetch $(git rev-parse --abbrev-ref origin/HEAD | tr '/' ' ')
           popd
-          sessionizer "''${d}"
+          ${pkgs.sessionizer}/bin/sessionizer "''${d}"
         }
         nix-init() {
           template=$1
