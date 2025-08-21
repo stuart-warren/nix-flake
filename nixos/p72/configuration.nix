@@ -5,11 +5,11 @@
 { me, inputs, outputs, lib, config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../generic/configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../generic/configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -24,11 +24,9 @@
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
-    graphics = {
-      enable = true;
-    };
+    graphics = { enable = true; };
   };
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   networking.hostName = "P72"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -107,33 +105,33 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-#  # Define a user account. Don't forget to set a password with ‘passwd’.
-#  users.users.stuartwarren = {
-#    isNormalUser = true;
-#    description = "Stuart Warren";
-#    extraGroups = [ "networkmanager" "wheel" ];
-#    packages = with pkgs; [
-#        brave
-#        google-chrome
-#    ];
-#  };
+  #  # Define a user account. Don't forget to set a password with ‘passwd’.
+  #  users.users.stuartwarren = {
+  #    isNormalUser = true;
+  #    description = "Stuart Warren";
+  #    extraGroups = [ "networkmanager" "wheel" ];
+  #    packages = with pkgs; [
+  #        brave
+  #        google-chrome
+  #    ];
+  #  };
 
-#  # Install firefox.
-#  programs.firefox.enable = true;
-#
-#  programs.direnv.enable = true;
-#
-#  # Allow unfree packages
-#  nixpkgs.config.allowUnfree = true;
-#
-#  # List packages installed in system profile. To search, run:
-#  # $ nix search wget
-#  environment.systemPackages = with pkgs; [
-#     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-#     wget
-#     git
-#     curl
-#  ];
+  #  # Install firefox.
+  #  programs.firefox.enable = true;
+  #
+  #  programs.direnv.enable = true;
+  #
+  #  # Allow unfree packages
+  #  nixpkgs.config.allowUnfree = true;
+  #
+  #  # List packages installed in system profile. To search, run:
+  #  # $ nix search wget
+  #  environment.systemPackages = with pkgs; [
+  #     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #     wget
+  #     git
+  #     curl
+  #  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -160,6 +158,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-#  system.stateVersion = "25.05"; # Did you read the comment?
+  #  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
