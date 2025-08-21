@@ -65,8 +65,8 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
-    variant = "dvorak";
+    layout = me.keyboard.layout;
+    variant = me.keyboard.variant;
   };
 
   # Configure console keymap

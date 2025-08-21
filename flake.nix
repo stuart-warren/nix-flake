@@ -44,8 +44,8 @@
         homeDirectory = /home/${username};
         timeZone = "Europe/London";
         keyboard = {
-          layout = "us";
-          variant = "dvorak";
+          layout = "us,us";
+          variant = "dvorak,";
         };
       };
     in {

@@ -16,6 +16,7 @@
           [ "hyprland/workspaces" "hyprland/mode" "hyprland/scratchpad" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [
+          "hyprland/language"
           "idle_inhibitor"
           "wireplumber"
           "network"
@@ -32,6 +33,10 @@
           background-color-active = "#FF0000";
           background-color-occupied = "#FFFF00";
           background-color-empty = "#000000";
+        };
+        "hyprland/language" = {
+          format = { };
+          on-click = "hyprctl switchxkblayout current next";
         };
       };
     };
