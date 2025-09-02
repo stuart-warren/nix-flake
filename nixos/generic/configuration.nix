@@ -73,7 +73,10 @@
     wireplumber
     gst_all_1.gstreamer
   ];
-  environment.variables = { NIXOS_OZONE_WL = "1"; };
+  environment.variables = {
+    NIXOS_OZONE_WL = "1";
+    GBM_BACKEND = "dri";
+  };
 
   programs.hyprland.enable = true;
   programs.zsh.enable = true;
@@ -92,7 +95,7 @@
     dev = "/dev/input/mouse2";
   };
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
 
   users.users = {
     "${me.username}" = {

@@ -49,7 +49,6 @@
   home.packages = with pkgs;
     [
       audacity
-      unstable.bambu-studio
       file
       freecad-wayland
       freetube
@@ -57,6 +56,7 @@
       google-chrome
       kdePackages.qtsvg
       kicad
+      unstable.bambu-studio
       vlc
       wofi
       font-awesome_4

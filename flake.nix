@@ -14,9 +14,6 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    kmonad.url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
-    kmonad.inputs.nixpkgs.follows = "nixpkgs";
-
     nixvim.url = "github:nix-community/nixvim/nixos-25.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -75,7 +72,6 @@
           specialArgs = { inherit me inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            inputs.kmonad.nixosModules.default
             ./nixos/p72/configuration.nix
             outputs.nixosModules.programs
           ];
@@ -84,7 +80,6 @@
           specialArgs = { inherit me inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            inputs.kmonad.nixosModules.default
             ./nixos/5540/configuration.nix
             outputs.nixosModules.programs
           ];
