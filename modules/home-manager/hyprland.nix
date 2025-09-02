@@ -3,6 +3,11 @@
 {
   programs.waybar = {
     enable = true;
+    # style = ''
+    #   * {
+    #     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    #   }
+    # '';
     settings = {
       # https://github.com/Alexays/Waybar/blob/master/resources/config.jsonc
       mainBar = {
@@ -22,6 +27,7 @@
           "network"
           "backlight"
           "battery"
+          "temperature"
           "clock"
           "tray"
         ];

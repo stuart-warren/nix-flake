@@ -46,7 +46,30 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [ google-chrome wofi kdePackages.qtsvg gemini-cli ];
+  home.packages = with pkgs;
+    [
+      audacity
+      unstable.bambu-studio
+      file
+      freecad-wayland
+      freetube
+      gemini-cli
+      google-chrome
+      kdePackages.qtsvg
+      kicad
+      vlc
+      wofi
+      font-awesome_4
+      font-awesome_5
+      font-awesome_6
+    ] ++ (with nerd-fonts; [
+      droid-sans-mono
+      fira-code
+      hack
+      jetbrains-mono
+      noto
+      ubuntu
+    ]);
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -108,6 +131,7 @@
   #     "$mod SHIFT, 9, movetoworkspace, 9"
   #   ];
   # };
+  fonts.fontconfig.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

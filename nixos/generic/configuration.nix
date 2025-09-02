@@ -71,6 +71,7 @@
     direnv
     home-manager
     wireplumber
+    gst_all_1.gstreamer
   ];
   environment.variables = { NIXOS_OZONE_WL = "1"; };
 
