@@ -56,7 +56,7 @@
       kb_variant = me.keyboard.variant;
       touchpad = {
         natural_scroll = true;
-        tap-to-click = true;
+        tap-to-click = false;
         tap-and-drag = false;
         clickfinger_behavior = true;
       };
