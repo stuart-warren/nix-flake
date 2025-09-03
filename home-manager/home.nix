@@ -56,7 +56,7 @@
       google-chrome
       kdePackages.qtsvg
       kicad
-      unstable.bambu-studio
+      orca-slicer
       vlc
       wofi
       font-awesome_4

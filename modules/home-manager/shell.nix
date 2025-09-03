@@ -210,7 +210,7 @@
         }
         nix-init() {
           template=$1
-          nix flake init --refresh -t "git+ssh://git@github.com/the-nix-way/dev-templates.git?ref=main#$template"
+          nix flake init --refresh --template "templates#$template"
           direnv allow
         }
       '';

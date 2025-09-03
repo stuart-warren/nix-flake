@@ -16,6 +16,8 @@
 
     nixvim.url = "github:nix-community/nixvim/nixos-25.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    templates.url = "github:the-nix-way/dev-templates";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

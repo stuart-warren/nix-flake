@@ -63,15 +63,15 @@
   time.timeZone = "${me.timeZone}";
 
   environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    unzip
-    kitty
     direnv
-    home-manager
-    wireplumber
+    git
     gst_all_1.gstreamer
+    home-manager
+    kitty
+    unzip
+    vim
+    wget
+    wireplumber
   ];
   environment.variables = {
     NIXOS_OZONE_WL = "1";
