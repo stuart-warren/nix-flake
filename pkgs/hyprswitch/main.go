@@ -45,6 +45,9 @@ func (c *Client) Contains(name string) bool {
 	if strings.Contains(c.Class, name) {
 		return true
 	}
+	if strings.Contains(c.InitialTitle, name) {
+		return true
+	}
 	return false
 }
 

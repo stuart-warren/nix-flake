@@ -77,6 +77,7 @@
       "$mod, return, exec, $terminal"
       "$hyper, t, exec, $hyprswitch kitty"
       "$hyper, b, exec, $hyprswitch google-chrome"
+      "$hyper, y, exec, $hyprswitch YouTube"
       "$hyper, SPACE, exec, $menu"
       "$hyper, f, exec, $filemanager"
       "$mod SHIFT, e, exit"

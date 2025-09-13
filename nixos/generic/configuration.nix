@@ -73,9 +73,12 @@
     wget
     wireplumber
   ];
-  environment.variables = {
-    NIXOS_OZONE_WL = "1";
-    GBM_BACKEND = "dri";
+  environment = {
+    variables = {
+      NIXOS_OZONE_WL = "1";
+      ELECTRON_OZONE_PLATFORM = "auto";
+      GBM_BACKEND = "dri";
+    };
   };
 
   programs.hyprland.enable = true;
