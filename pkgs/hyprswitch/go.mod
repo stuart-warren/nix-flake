@@ -1,8 +1,5 @@
-module hyprswitch
+module github.com/stuart-warren/nix-flake/pkgs/hyprswitch
 
-go 1.22.12
+go 1.21
 
-require (
-	github.com/BurntSushi/toml v1.5.0 // indirect
-	github.com/rkoesters/xdg v0.0.1 // indirect
-)
+require github.com/rkoesters/xdg v0.0.1
