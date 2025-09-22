@@ -17,6 +17,7 @@
       enable = true;
       userName = me.githubUsername;
       userEmail = me.githubEmail;
+      ignores = [ "*.swp" "*.swo" ".DS_Store" "._*" "Thumbs.db" ".direnv" ];
       # includes = [{
       #   contents = {
       #     # user.signingkey = "~/.ssh/id_rsa.pub";
