@@ -79,7 +79,7 @@
       "$hyper, b, exec, $hyprswitch google-chrome"
       "$hyper, y, exec, $hyprswitch YouTube"
       "$hyper, SPACE, exec, $menu"
-      "$hyper, f, exec, $filemanager"
+      "$hyper, f, exec, $filemanger"
       "$mod SHIFT, e, exit"
       "$mod SHIFT, q, killactive"
       # "$mod SHIFT, l, exec, ${pkgs.hyprlock}/bin/hyprlock"
@@ -108,6 +108,8 @@
       "$mod SHIFT, 7, movetoworkspace, 7"
       "$mod SHIFT, 8, movetoworkspace, 8"
       "$mod SHIFT, 9, movetoworkspace, 9"
+      # # Resize
+      # "$mod SHIFT, r, submap, resize"
       # Audio
       ", XF86AudioRaiseVolume, exec, $wpctl set-volume @DEFAULT_SINK@ 5%+"
       ", XF86AudioLowerVolume, exec, $wpctl set-volume @DEFAULT_SINK@ 5%-"
@@ -117,6 +119,24 @@
       ", XF86MonBrightnessUp, exec, $brightnessctl set 10%+"
       ", XF86MonBrightnessDown, exec, $brightnessctl set 10%-"
     ];
-  };
+    bindm = [
+      # Mouse
+      "$mod, mouse:272, resizewindow"
+    ];
 
+  };
+  # needs newer version of home-manager
+  # wayland.windowManager.hyprland.submaps = {
+  #   resize = {
+  #     settings = {
+  #       binde = [
+  #         ", LEFT, resizeactive, -10 0"
+  #         ", RIGHT, resizeactive, 10 0"
+  #         ", UP, resizeactive, 0 -10px"
+  #         ", DOWN, resizeactive, 0 10px"
+  #       ];
+  #       bind = [ ", RETURN, submap, reset" ];
+  #     };
+  #   };
+  # };
 }

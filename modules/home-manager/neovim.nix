@@ -363,49 +363,45 @@ in {
       {
         mode = [ "n" ];
         key = "<leader>xx";
-        action = helpers.mkRaw "function() require('trouble').toggle() end";
+        action = "<Cmd>Trouble diagnostics toggle<cr>";
         options.desc = "toggle trouble";
       }
-      {
-        mode = [ "n" ];
-        key = "<leader>xw";
-        action = helpers.mkRaw
-          "function() require('trouble').toggle('workspace_diagnostics') end";
-        options.desc = "workspace diagnostics";
-      }
+      # {
+      #   mode = [ "n" ];
+      #   key = "<leader>xw";
+      #   action = "<Cmd>Trouble diagnostics toggle<cr>";
+      #   action = helpers.mkRaw
+      #     "function() require('trouble').toggle('workspace_diagnostics') end";
+      #   options.desc = "workspace diagnostics";
+      # }
       {
         mode = [ "n" ];
         key = "<leader>xd";
-        action = helpers.mkRaw
-          "function() require('trouble').toggle('document_diagnostics') end";
+        action = "<Cmd>Trouble diagnostics toggle filter.buf=0<cr>";
         options.desc = "document diagnostics";
       }
       {
         mode = [ "n" ];
         key = "<leader>xq";
-        action =
-          helpers.mkRaw "function() require('trouble').toggle('quickfix') end";
+        action = "<Cmd>Trouble qflist toggle<cr>";
         options.desc = "quickfix";
       }
       {
         mode = [ "n" ];
         key = "<leader>xl";
-        action =
-          helpers.mkRaw "function() require('trouble').toggle('loclist') end";
+        action = "<Cmd>Trouble loclist toggle<cr>";
         options.desc = "loclist";
       }
       {
         mode = [ "n" ];
         key = "gR";
-        action = helpers.mkRaw
-          "function() require('trouble').toggle('lsp_references') end";
+        action = "<Cmd>Trouble lsp toggle focus=false win.position=right<cr>";
         options.desc = "lsp references";
       }
       {
         mode = [ "n" ];
         key = "gI";
-        action = helpers.mkRaw
-          "function() require('trouble').toggle('lsp_implementations') end";
+        action = "<Cmd>Trouble lsp_implementations toggle focus=false win.position=right<cr>";
         options.desc = "lsp implementations";
       }
       {
