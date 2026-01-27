@@ -1,6 +1,14 @@
 { config, pkgs, me, ... }:
 
 {
+  services.udiskie = {
+    enable = true;
+    settings = {
+      program_options = {
+        file_manager = "${pkgs.nemo-with-extensions}/bin/nemo";
+      };
+    };
+  };
   programs.waybar = {
     enable = true;
     # style = ''

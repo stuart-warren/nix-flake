@@ -172,7 +172,10 @@ in {
           bashls.enable = true;
           cssls.enable = true;
           # dockerls.enable = true;
-          gopls.enable = true;
+          gopls = {
+            enable = true;
+            settings = { buildFlags = [ "-tags=tpmsimulator" ]; };
+          };
           lua_ls.enable = true;
           # marksman.enable = true;
           nixd.enable = true;
@@ -401,7 +404,8 @@ in {
       {
         mode = [ "n" ];
         key = "gI";
-        action = "<Cmd>Trouble lsp_implementations toggle focus=false win.position=right<cr>";
+        action =
+          "<Cmd>Trouble lsp_implementations toggle focus=false win.position=right<cr>";
         options.desc = "lsp implementations";
       }
       {

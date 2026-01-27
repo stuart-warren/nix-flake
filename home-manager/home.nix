@@ -49,14 +49,17 @@
   home.packages = with pkgs;
     [
       audacity
+      cheese
       file
-      freecad-wayland
+      unstable.freecad-wayland
       freetube
       gemini-cli
+      gimp
       google-chrome
       kdePackages.qtsvg
       kicad
       orca-slicer
+      bambu-studio
       vlc
       wofi
       font-awesome_4

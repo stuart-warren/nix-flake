@@ -38,6 +38,8 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      permittedInsecurePackages = [ "python3.13-ecdsa-0.19.1" ];
+      segger-jlink.acceptLicense = true;
     };
   };
 
@@ -72,6 +74,8 @@
     vim
     wget
     wireplumber
+    mynrfutil
+    adafruit-nrfutil
   ];
   environment = {
     variables = {
@@ -97,6 +101,7 @@
     tapping = false;
     dev = "/dev/input/mouse2";
   };
+  services.pcscd.enable = true;
 
   # virtualisation.docker.enable = true;
 
@@ -109,40 +114,47 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups =
-        [ "wheel" "networkmanager" "audio" "docker" "input" "uinput" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "audio"
+        "docker"
+        "input"
+        "uinput"
+        "dialout"
+      ];
       shell = pkgs.zsh;
       packages = with pkgs; [ brave ];
     };
   };
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    loadModels = [ "gemma3" "gemma3n:e4b" "codegemma" "gpt-oss" ];
-  };
-
-  services.open-webui = {
-    enable = true;
-    port = 8080;
-    environment = {
-      ENABLE_RAG_WEB_SEARCH = "True";
-      RAG_WEB_SEARCH_ENGINE = "searxng";
-      RAG_WEB_SEARCH_RESULT_COUNT = "3";
-      RAG_WEB_SEARCH_CONCURRENT_REQUESTS = "10";
-      SEARXNG_QUERY_URL = "http://localhost:9090/search?q=<query>";
-    };
-  };
-
-  services.searx = {
-    enable = true;
-    package = pkgs.searxng;
-    settings = {
-      server.port = 9090;
-      server.secret_key = "foobar";
-      search.formats = [ "html" "json" ];
-    };
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgs.ollama-cuda;
+  #   loadModels = [ "gemma3" "gemma3n:e4b" "codegemma" "gpt-oss" ];
+  # };
+  #
+  # services.open-webui = {
+  #   enable = true;
+  #   port = 8080;
+  #   environment = {
+  #     ENABLE_RAG_WEB_SEARCH = "True";
+  #     RAG_WEB_SEARCH_ENGINE = "searxng";
+  #     RAG_WEB_SEARCH_RESULT_COUNT = "3";
+  #     RAG_WEB_SEARCH_CONCURRENT_REQUESTS = "10";
+  #     SEARXNG_QUERY_URL = "http://localhost:9090/search?q=<query>";
+  #   };
+  # };
+  #
+  # services.searx = {
+  #   enable = true;
+  #   package = pkgs.searxng;
+  #   settings = {
+  #     server.port = 9090;
+  #     server.secret_key = "foobar";
+  #     search.formats = [ "html" "json" ];
+  #   };
+  # };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
@@ -162,6 +174,8 @@
     alsa.enable = true;
     pulse.enable = true;
   };
+  services.udisks2.enable = true;
+  services.udev.packages = with pkgs; [ nrf-udev ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";
