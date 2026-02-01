@@ -1,4 +1,4 @@
-{ config, pkgs, me, ... }:
+{ inputs, config, pkgs, me, ... }:
 
 {
   services.udiskie = {
@@ -8,6 +8,19 @@
         file_manager = "${pkgs.nemo-with-extensions}/bin/nemo";
       };
     };
+  };
+  services.vicinae = {
+    enable = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+      environment = { USE_LAYER_SHELL = "1"; };
+    };
+    extensions =
+      with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+        bluetooth
+        nix
+      ];
   };
   programs.waybar = {
     enable = true;

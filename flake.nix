@@ -1,6 +1,10 @@
 {
   description = "nix config";
-
+  nixConfig = {
+    extra-substituters = [ "https://vicinae.cachix.org/" ];
+    extra-trusted-public-keys =
+      [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
+  };
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -16,6 +20,10 @@
 
     nixvim.url = "github:nix-community/nixvim/nixos-25.11";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    vicinae.url = "github:vicinaehq/vicinae";
+    vicinae-extensions.url = "github:vicinaehq/extensions";
+    # vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     templates.url = "github:the-nix-way/dev-templates";
   };
@@ -47,8 +55,7 @@
           variant = "dvorak,";
         };
       };
-    in
-    {
+    in {
       # Your custom packages
       # Accessible through 'nix build', 'nix shell', etc
       packages =
@@ -100,6 +107,7 @@
           modules = [
             # > Our main home-manager configuration file <
             inputs.nixvim.homeManagerModules.nixvim
+            inputs.vicinae.homeManagerModules.default
             ./home-manager/home.nix
             outputs.homeManagerModules.neovim
             outputs.homeManagerModules.shell
