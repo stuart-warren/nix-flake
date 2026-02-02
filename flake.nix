@@ -106,7 +106,7 @@
           extraSpecialArgs = { inherit me inputs outputs; };
           modules = [
             # > Our main home-manager configuration file <
-            inputs.nixvim.homeManagerModules.nixvim
+            inputs.nixvim.homeModules.nixvim
             inputs.vicinae.homeManagerModules.default
             ./home-manager/home.nix
             outputs.homeManagerModules.neovim

@@ -15,8 +15,12 @@
     };
     git = {
       enable = true;
-      userName = me.githubUsername;
-      userEmail = me.githubEmail;
+      settings = {
+        user = {
+          name = me.githubUsername;
+          email = me.githubEmail;
+        };
+      };
       ignores = [ "*.swp" "*.swo" ".DS_Store" "._*" "Thumbs.db" ".direnv" ];
       # includes = [{
       #   contents = {
@@ -28,7 +32,10 @@
     };
     ssh = {
       enable = true;
-      addKeysToAgent = "yes";
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        addKeysToAgent = "yes";
+      };
     };
     oh-my-posh = {
       enable = true;

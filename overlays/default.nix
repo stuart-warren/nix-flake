@@ -8,7 +8,7 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     {
-      vicinae = inputs.vicinae.packages.${final.system}.default;
+      vicinae = inputs.vicinae.packages.${final.stdenv.hostPlatform.system}.default;
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
@@ -24,7 +24,7 @@
   # be accessible through 'pkgs.unstable'
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
+      system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
   };
