@@ -86,7 +86,8 @@
     };
     "$terminal" = "${pkgs.kitty}/bin/kitty";
     "$filemanager" = "${pkgs.kdePackages.dolphin}/bin/dolphin";
-    "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+    # "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+    "$menu" = "${pkgs.vicinae}/bin/vicinae toggle";
     "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
     "$brightnessctl" = "${pkgs.brightnessctl}/bin/brightnessctl";
     "$hyprswitch" = "${pkgs.hyprswitch}/bin/hyprswitch";

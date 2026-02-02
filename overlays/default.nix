@@ -8,6 +8,7 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev:
     {
+      vicinae = inputs.vicinae.packages.${final.system}.default;
       # example = prev.example.overrideAttrs (oldAttrs: rec {
       # ...
       # });
