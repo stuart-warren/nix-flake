@@ -22,8 +22,9 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     vicinae.url = "github:vicinaehq/vicinae";
+    # vicinae.inputs.nixpkgs.follows = "nixpkgs";
     vicinae-extensions.url = "github:vicinaehq/extensions";
-    # vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     templates.url = "github:the-nix-way/dev-templates";
   };
@@ -55,7 +56,8 @@
           variant = "dvorak,";
         };
       };
-    in {
+    in
+    {
       # Your custom packages
       # Accessible through 'nix build', 'nix shell', etc
       packages =
