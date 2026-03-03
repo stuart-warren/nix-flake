@@ -21,12 +21,11 @@
   hardware = {
     nvidia = {
       nvidiaSettings = true;
-      open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      open = true;
     };
     graphics = { enable = true; };
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # services.xserver.videoDrivers = [ "nvidia" ];
 
   networking.hostName = "P72"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -60,8 +59,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
