@@ -15,6 +15,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel configuration for laptop optimization
+  boot.kernelModules = [ "kvm-intel" "thinkpad_acpi" "iTCO_wdt" ];
+  boot.kernelParams = [ "i915.enable_fbc=1" "intel_pstate=active" ];
+
   # Use latest kernel.
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -26,6 +30,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
     graphics = { enable = true; };
+    cpu.intel.updateMicrocode = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -84,6 +89,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -103,8 +109,41 @@
     };
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # Enable touchpad support with gestures.
+  services.libinput = {
+    enable = true;
+    touchpad.naturalScrolling = true;
+    touchpad.clickMethod = "clickfinger";
+    touchpad.accelSpeed = "0.3";
+  };
+
+  # Power management and thermal control for ThinkPad
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+  # Disable GNOME's power-profiles-daemon as it conflicts with TLP
+  services.power-profiles-daemon.enable = false;
+  services.thermald.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 50;
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+    };
+  };
+
+  # ThinkPad-specific fan control
+  services.thinkfan.enable = true;
+
+  # TPM 2.0 support
+  security.tpm2.enable = true;
 
   #  # Define a user account. Don't forget to set a password with ‘passwd’.
   #  users.users.stuartwarren = {
