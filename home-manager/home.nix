@@ -60,6 +60,8 @@
       kicad
       orca-slicer
       bambu-studio
+      tio
+      github-copilot-cli
       vlc
       wofi
       font-awesome_4

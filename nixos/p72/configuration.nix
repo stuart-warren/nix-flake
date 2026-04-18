@@ -16,16 +16,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware = {
     nvidia = {
+      modesetting.enable = true;
       nvidiaSettings = true;
       open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     graphics = { enable = true; };
   };
-  # services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   networking.hostName = "P72"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

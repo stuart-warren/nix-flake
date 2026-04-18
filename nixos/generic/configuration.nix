@@ -43,24 +43,25 @@
     };
   };
 
-  nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-      trusted-users = [ me.username ];
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
+  nix =
+    let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+        trusted-users = [ me.username ];
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
 
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    };
 
   time.timeZone = "${me.timeZone}";
 
@@ -76,12 +77,21 @@
     wireplumber
     mynrfutil
     adafruit-nrfutil
+    nvtopPackages.nvidia
   ];
   environment = {
     variables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM = "auto";
       GBM_BACKEND = "dri";
+    };
+    sessionVariables = {
+      # For Hyprland
+      XDG_SESSION_TYPE = "wayland";
+      GDK_BACKEND = "wayland";
+      QT_QPA_PLATFORM = "wayland";
+      CLUTTER_BACKEND = "wayland";
+      PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True";
     };
   };
 
@@ -128,33 +138,38 @@
     };
   };
 
-  # services.ollama = {
-  #   enable = true;
-  #   package = pkgs.ollama-cuda;
-  #   loadModels = [ "gemma3" "gemma3n:e4b" "codegemma" "gpt-oss" ];
-  # };
-  #
-  # services.open-webui = {
-  #   enable = true;
-  #   port = 8080;
-  #   environment = {
-  #     ENABLE_RAG_WEB_SEARCH = "True";
-  #     RAG_WEB_SEARCH_ENGINE = "searxng";
-  #     RAG_WEB_SEARCH_RESULT_COUNT = "3";
-  #     RAG_WEB_SEARCH_CONCURRENT_REQUESTS = "10";
-  #     SEARXNG_QUERY_URL = "http://localhost:9090/search?q=<query>";
-  #   };
-  # };
-  #
-  # services.searx = {
-  #   enable = true;
-  #   package = pkgs.searxng;
-  #   settings = {
-  #     server.port = 9090;
-  #     server.secret_key = "foobar";
-  #     search.formats = [ "html" "json" ];
-  #   };
-  # };
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    package = pkgs.ollama-cuda;
+    loadModels = [ "gemma3:4b-it-qat" ];
+    environmentVariables = { CUDA_VISIBLE_DEVICES = "0"; };
+  };
+  services.searx = {
+    enable = true;
+    package = pkgs.searxng;
+    settings = {
+      server.port = 9090;
+      server.secret_key = "foobar";
+      search.formats = [ "html" "json" ];
+    };
+  };
+
+  services.open-webui = {
+    enable = true;
+    port = 8080;
+    host = "127.0.0.1";
+    environment = {
+      OLLAMA_API_BASE_URL = "http://localhost:11434";
+      ENABLE_RAG_WEB_SEARCH = "True";
+      RAG_WEB_SEARCH_ENGINE = "searxng";
+      RAG_WEB_SEARCH_RESULT_COUNT = "3";
+      RAG_WEB_SEARCH_CONCURRENT_REQUESTS = "10";
+      SEARXNG_QUERY_URL = "http://localhost:9090/search?q=<query>";
+      WEBUI_AUTH = "False";
+      DATA_DIR = "/var/lib/open-webui/data";
+    };
+  };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
