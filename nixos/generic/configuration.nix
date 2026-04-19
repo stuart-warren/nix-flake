@@ -138,13 +138,7 @@
     };
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    package = pkgs.ollama-cuda;
-    loadModels = [ "gemma3:4b-it-qat" ];
-    environmentVariables = { CUDA_VISIBLE_DEVICES = "0"; };
-  };
+  # ollama defined in machine specific configuration.nix
   services.searx = {
     enable = true;
     package = pkgs.searxng;

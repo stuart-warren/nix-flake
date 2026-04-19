@@ -139,6 +139,21 @@
     };
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    package = pkgs.unstable.ollama-cuda.override {
+      # $ nvidia-smi --query-gpu=name,compute_cap --format=csv
+      # name, compute_cap
+      # Quadro P2000, 6.1
+      cudaArches = [ "61" ]; # Replace "61" with your GPU's compute capability
+    };
+    loadModels = [ "gemma4:e2b" "gemma4:e4b" ];
+    environmentVariables = {
+      OLLAMA_GPU_MEMORY_FRACTION = "0.9";
+      OLLAMA_NUM_GPU = "-1";
+    };
+  };
   # ThinkPad-specific fan control
   services.thinkfan.enable = true;
 
