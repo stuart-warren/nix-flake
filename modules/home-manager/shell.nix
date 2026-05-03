@@ -33,9 +33,7 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks."*" = {
-        addKeysToAgent = "yes";
-      };
+      matchBlocks."*" = { addKeysToAgent = "yes"; };
     };
     oh-my-posh = {
       enable = true;
@@ -225,4 +223,24 @@
     };
   };
   services.ssh-agent.enable = true;
+  xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
+    "$schema" = "https://opencode.ai/config.json";
+    provider = {
+      ollama = {
+        npm = "@ai-sdk/openai-compatible";
+        name = "Ollama (local)";
+        options = { baseURL = "http://localhost:11434/v1"; };
+        models = {
+          "gemma4:e4b" = { name = "Gemma 4 e4b"; };
+          "gemma4:26b" = { name = "Gemma 4 26b"; };
+          "gemma4:e2b" = { name = "Gemma 4 e2b"; };
+          "gemma3:4b-it-qat" = { name = "Gemma 3 4b QAT"; };
+          "gpt-oss:latest" = { name = "GPT-OSS"; };
+          "codegemma:latest" = { name = "Code Gemma"; };
+          "gemma3:latest" = { name = "Gemma 3"; };
+          "gemma3n:e4b" = { name = "Gemma 3n e4b"; };
+        };
+      };
+    };
+  };
 }
