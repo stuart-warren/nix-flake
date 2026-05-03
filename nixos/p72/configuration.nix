@@ -27,7 +27,7 @@
       modesetting.enable = true;
       nvidiaSettings = true;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
     };
     graphics = { enable = true; };
     cpu.intel.updateMicrocode = true;
@@ -80,7 +80,13 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -143,12 +149,10 @@
     enable = true;
     acceleration = "cuda";
     package = pkgs.unstable.ollama-cuda.override {
-      # $ nvidia-smi --query-gpu=name,compute_cap --format=csv
-      # name, compute_cap
-      # Quadro P2000, 6.1
-      cudaArches = [ "61" ]; # Replace "61" with your GPU's compute capability
+      cudaArches = [ "61" ];
+      cudaPackages = inputs.cuda-legacy.legacyPackages.x86_64-linux.cudaPackages_11_8;
     };
-    loadModels = [ "gemma4:e2b" "gemma4:e4b" ];
+    loadModels = [ "gemma4:e2b" "gemma4:e4b" "gemma4:26b" ];
     environmentVariables = {
       OLLAMA_GPU_MEMORY_FRACTION = "0.9";
       OLLAMA_NUM_GPU = "-1";

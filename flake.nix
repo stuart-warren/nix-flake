@@ -27,6 +27,7 @@
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     templates.url = "github:the-nix-way/dev-templates";
+    cuda-legacy.url = "github:nixos-cuda/cuda-legacy";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -56,6 +57,8 @@
           variant = "dvorak,";
         };
       };
+      # Get cuda-legacy packages for x86_64-linux
+      cudaLegacyPkgs = inputs.cuda-legacy.legacyPackages.x86_64-linux;
     in
     {
       # Your custom packages

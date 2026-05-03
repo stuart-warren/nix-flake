@@ -132,6 +132,7 @@
         "input"
         "uinput"
         "dialout"
+        "lpadmin"
       ];
       shell = pkgs.zsh;
       packages = with pkgs; [ brave ];
